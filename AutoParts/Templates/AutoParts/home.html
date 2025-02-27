@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ff6b6b, #1e3a8a);
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .navbar a:hover {
+            color: #ffcc00;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+            width: 340px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            color: white;
+            font-weight: 600;
+        }
+        p {
+            color: #f1f1f1;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: linear-gradient(to right, #ff6b6b, #ffcc00);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .btn:hover {
+            background: linear-gradient(to right, #ffcc00, #ff6b6b);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .ribbon {
+            position: absolute;
+            top: 10px;
+            right: -10px;
+            background: #ffcc00;
+            color: white;
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            transform: rotate(45deg);
+        }
+        .product-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Contact</a>
+    </div>
+    <h1 data-aos="fade-down">✨ Explore Our Featured Products ✨</h1>
+    <div class="container">
+        {% for pro in prod %}
+        <div class="card" data-aos="zoom-in">
+            {% if pro.is_featured %}
+            <div class="ribbon">🔥 Featured</div>
+            {% endif %}
+            <img src="{{ pro.image_url }}" alt="{{ pro.name }}" class="product-img">
+            <h2>🌟 {{ pro.name }}</h2>
+            <p>📖 {{ pro.desc }}</p>
+            <p class="price">💲{{ pro.price }}</p>
+            <a href="#" class="btn">🛒 Buy Now</a>
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        AOS.init({ duration: 1000, easing: 'ease-in-out', once: true });
+    </script>
+</body>
+</html>
